@@ -5,10 +5,9 @@ import { useMemo, useState } from "react";
 import { ThreadData } from "@liveblocks/client";
 import { Thread } from "@liveblocks/react-comments";
 
-import { ThreadMetadata } from "@/liveblocks.config";
 
 type Props = {
-  thread: ThreadData<ThreadMetadata>;
+  thread: ThreadData<any>;
   onFocus: (threadId: string) => void;
 };
 

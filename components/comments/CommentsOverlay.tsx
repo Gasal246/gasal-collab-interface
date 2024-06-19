@@ -3,13 +3,13 @@
 import { useCallback, useRef } from "react";
 import { ThreadData } from "@liveblocks/client";
 
-import { ThreadMetadata, useEditThreadMetadata, useThreads, useUser } from "@/liveblocks.config";
-import { useMaxZIndex } from "@/lib/useMaxZIndex";
 
 import { PinnedThread } from "./PinnedThread";
+import { useEditThreadMetadata, useThreads, useUser } from "@liveblocks/react";
+import { useMaxZIndex } from "@/lib/useMaxZIndex";
 
 type OverlayThreadProps = {
-  thread: ThreadData<ThreadMetadata>;
+  thread: ThreadData<any>;
   maxZIndex: number;
 };
 
@@ -20,7 +20,7 @@ export const CommentsOverlay = () => {
    *
    * useThreads: https://liveblocks.io/docs/api-reference/liveblocks-react#useThreads
    */
-  const { threads } = useThreads();
+  const { threads } = useThreads() as any;
 
   // get the max z-index of a thread
   const maxZIndex = useMaxZIndex();
@@ -28,8 +28,8 @@ export const CommentsOverlay = () => {
   return (
     <div>
       {threads
-        .filter((thread) => !thread.metadata.resolved)
-        .map((thread) => (
+        .filter((thread: any) => !thread.metadata.resolved)
+        .map((thread: any) => (
           <OverlayThread key={thread.id} thread={thread} maxZIndex={maxZIndex} />
         ))}
     </div>
